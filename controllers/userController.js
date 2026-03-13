@@ -26,7 +26,7 @@ exports.getUsersById=(req,res)=>{
 exports.createUser=(req,res)=>{
     const {fname,lname,email,gender,ip_add} = req.body;
     connection.query('INSERT INTO userdata (first_name, last_name, email, gender, ip_address) VALUES (?,?,?,?,?)',
-      [fname,lname,email,gender,ip],(err,result)=>{
+      [fname,lname,email,gender,ip_add],(err,result)=>{
         if(err) throw err;
             res.json({message: 'User Created Succesfully', userId:result.insertId});
     });
@@ -36,7 +36,7 @@ exports.createUser=(req,res)=>{
 // CRUD - Update
 exports.updateUser = (req, res) => {
   const {fname,lname,email,gender,ip_add,id } = req.body;
-  connection.query("UPDATE userdata SET first_name=?, last_name=?, email=?, gender=?, ip_address WHERE id=?",
+  connection.query("UPDATE userdata SET first_name=?, last_name=?, email=?, gender=?, ip_address=? WHERE id=?",
     [fname,lname,email,gender,ip_add,id],
     (err, result) => {
       if (err) throw err;
