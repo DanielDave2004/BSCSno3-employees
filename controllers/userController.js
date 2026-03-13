@@ -24,9 +24,9 @@ exports.getUsersById=(req,res)=>{
 //Create a new user
 //CRUD - Create
 exports.createUser=(req,res)=>{
-    const {fname,lname,email,gender} = req.body;
-    connection.query('INSERT INTO userdata (first_name, last_name, email, gender) VALUES (?,?,?,?)',
-      [fname,lname,email,gender],(err,result)=>{
+    const {fname,lname,email,gender,ip_add} = req.body;
+    connection.query('INSERT INTO userdata (first_name, last_name, email, gender, ip_address) VALUES (?,?,?,?,?)',
+      [fname,lname,email,gender,ip],(err,result)=>{
         if(err) throw err;
             res.json({message: 'User Created Succesfully', userId:result.insertId});
     });
@@ -35,9 +35,9 @@ exports.createUser=(req,res)=>{
 // Update a user
 // CRUD - Update
 exports.updateUser = (req, res) => {
-  const {fname,lname,email,gender,id } = req.body;
-  connection.query("UPDATE userdata SET first_name=?, last_name=?, email=?, gender=? WHERE id=?",
-    [fname,lname,email,gender,id],
+  const {fname,lname,email,gender,ip_add,id } = req.body;
+  connection.query("UPDATE userdata SET first_name=?, last_name=?, email=?, gender=?, ip_address WHERE id=?",
+    [fname,lname,email,gender,ip_add,id],
     (err, result) => {
       if (err) throw err;
       if (result.affectedRows > 0) {
